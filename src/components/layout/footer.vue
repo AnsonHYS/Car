@@ -16,9 +16,7 @@ export default {
   name: "FooterDiv",
   data() {
     return {
-      navs: [
-        
-      ]
+      navs: []
     };
   },
   methods: {
