@@ -39,7 +39,13 @@
         :key="index"
         :class="L.key==navOn?'on a':'a'"
         @click="turnNav(L)"
-      >{{Language(L.key)}}</li>
+      >{{Language(L.key)}}
+        <ul class="second-nav">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+      </li>
     </ul>
   </header>
 </template>
@@ -207,6 +213,7 @@ ul.nav {
   width: 1200px;
 }
 .a {
+  position: relative;
   display: table-cell;
   padding: 5px;
   font-size: 15px;
@@ -222,7 +229,7 @@ ul.nav {
 .a {
   color: rgb(54, 54, 54);
 }
-.on {
+.on a{
   background: #fa8378 !important;
   color: white !important;
 }
@@ -230,4 +237,25 @@ ul.nav {
   background: #ff998f;
   color: white;
 }
+.a:hover .second-nav{
+  display: block;
+   background: #ffd7d3!important;
+   color: black;
+}
+
+/*二级菜单栏*/
+.second-nav {
+      display: none;
+    position: absolute;
+    background: #fcf6c5;
+    list-style: none;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid white;
+    left: 0;
+    top: 45px;
+}
+.second-nav li:hover{
+  background: #fa8378;
+} 
 </style>
