@@ -14,6 +14,9 @@ export const lang = {
     FOOTER:{
       telV:'tel',
       productV:'productNo'
+    },
+    carV:{
+      
     }
 
     

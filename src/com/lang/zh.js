@@ -14,5 +14,9 @@ export const lang = {
     FOOTER:{
       telV:'联系方式',
       productV:'生产号',
+    },
+    carV:{
+      
     }
+
   }
