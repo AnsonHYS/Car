@@ -2,7 +2,7 @@
   <header class="header">
     <div class="nav-title">
       <div class="nav-tab LOGO">
-        <img src="@/assets/logo.png">
+        <img src="../../../static/assets/logo.png">
       </div>
       <div class="nav-tab SEARCH">
         <div class="sDiv">
@@ -26,9 +26,9 @@
         </el-select>
 
         <div class="loginDiv">
-          <span>{{$t("lang.loginV")}}</span>
+          <router-link to="/login">{{$t("lang.loginV")}}</router-link>
           <i class="line"></i>
-          <span>{{$t('lang.registV')}}</span>
+          <router-link to="">{{$t('lang.registV')}}</router-link>
         </div>
       </div>
     </div>
@@ -39,19 +39,23 @@
         :key="index"
         :class="L.key==navOn?'on a':'a'"
         @click="turnNav(L)"
-      >{{Language(L.key)}}
-        <ul class="second-nav">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
+      >
+    
+        {{Language(L.key)}}
+
+        <ul class="second-nav" v-if="L.key=='productV'">
+          <li v-for="(Lis,i) in CarList" :key="i" @click="toCar(Lis)">{{Lis.productName}}</li>
         </ul>
       </li>
     </ul>
+    <!-- 购物车 -->
+    <cart></cart>
   </header>
 </template>
 
 <script>
 import LangStorage from "@/com/lang";
+import cart from "@/components/cart.vue"
 export default {
   name: "headerDiv",
   data() {
@@ -60,12 +64,14 @@ export default {
       options: [{ value: "zh-CN", key: "ZH" }, { value: "en-US", key: "EN" }],
       nav: [
         { key: "homeV", url: "/home/index" },
-        { key: "productV", url: "/home/index" },
-        { key: "aboutV", url: "/home/index" },
-        { key: "newsV", url: "/home/index" }
+        { key: "productV", url: "" },
+        { key: "aboutV", url: "" },
+        { key: "newsV", url: "/home/news" },
+        { key: "contantV", url: "" }
       ],
       SearchVal: "",
-      navOn: "homeV" //
+      navOn: "homeV", //
+      CarList: []
     };
   },
   mounted() {
@@ -76,17 +82,23 @@ export default {
   },
   methods: {
     getDate: function() {
-      this.$http.get("/api/seller", {
+      this.$http
+        .get("/api/seller", {
           params: {}
         })
         .then(response => {
           //这里要使用箭头函数，使用ES5的写法  this是undefined
           console.log(response);
+           
+          this.CarList = response.data.data.data;
         })
         .catch(error => {
           console.log(error);
-          console.log(this);
         });
+    },
+    //进入商品页
+    toCar:function(data){
+        this.$router.push({path:"/home/car/"+data.productId});
     },
     selLang: function(a) {
       var t = this;
@@ -111,20 +123,25 @@ export default {
       console.log();
     },
     turnNav: function(obj) {
-      debugger;
+      this.$router.push(obj.url);
       this.navOn = obj.key;
     }
+  },//method end
+  components:{
+    cart:cart
   }
 };
 </script>
 
 <style>
 .header {
-  display: table;
-  margin: auto;
-  background: white;
-  box-shadow: 0px 0px 5px -3px black;
-  width: 100%;
+    display: table;
+    margin: auto;
+    background: white;
+    -webkit-box-shadow: 0px 0px 5px -3px black;
+    box-shadow: 0px 2px 5px -3px black;
+    width: 100%;
+    margin-bottom: 2px;
 }
 .nav-title {
   display: table;
@@ -188,7 +205,7 @@ export default {
 .loginDiv {
   display: inline-block;
 }
-.RL span {
+.RL a {
   display: inline-block;
   font-size: 16px;
   color: #737272;
@@ -229,7 +246,7 @@ ul.nav {
 .a {
   color: rgb(54, 54, 54);
 }
-.on a{
+.on {
   background: #fa8378 !important;
   color: white !important;
 }
@@ -237,24 +254,25 @@ ul.nav {
   background: #ff998f;
   color: white;
 }
-.a:hover .second-nav{
+.a:hover .second-nav {
   display: block;
-   background: #ffd7d3!important;
-   color: black;
+  background: #ffd7d3 !important;
+  color: black;
 }
 /*二级菜单栏*/
 .second-nav {
-      display: none;
-    position: absolute;
-    background: #fcf6c5;
-    list-style: none;
-    width: 100%;
-    border: 0;
-    border-bottom: 1px solid white;
-    left: 0;
-    top: 45px;
+  display: none;
+  position: absolute;
+  background: #fcf6c5;
+  list-style: none;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid white;
+  left: 0;
+  top: 45px;
+      z-index: 999;
 }
-.second-nav li:hover{
+.second-nav li:hover {
   background: #fa8378;
-} 
+}
 </style>

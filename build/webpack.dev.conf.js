@@ -15,8 +15,8 @@ const app = express()
 const appData = require('../static/data/data.json')//加载本地的json文件
 debugger;
 const seller = appData.seller
-const goods = appData.goods
-const ratings = appData.ratings
+const news = appData.news
+const order = appData.order
 const apiRoutes = express.Router()
 app.use('/api',apiRoutes)
 /**********************/
@@ -64,16 +64,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
               data: seller
           })//接口返回json数据，上面配置的数据seller就复制给data请求后调用
       }),
-      app.get('/api/goods',(reg,res) => {
+      app.get('/api/news',(reg,res) => {
           res.json({
               errno: 0,
-              data: goods
+              data: news
           })
       }),
-      app.get('api/ratings',(reg,res) => {
+      app.get('api/order',(reg,res) => {
           res.json({
               errno: 0,
-              data: ratings
+              data: order
           })
       })
     }/********** 本地测试数据 end*************/

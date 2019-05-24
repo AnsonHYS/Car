@@ -15,8 +15,24 @@ export default new Router({
           path: "index",
           component: () => import('@/page/visitor/index.vue')
         },
+        {
+          path: "news",
+          component: () => import('@/page/visitor/newsList.vue')
+        },
+        {
+          path: "car/:id",
+          component: () => import('@/page/visitor/carPage.vue')
+        },
 
       ]
+    },
+    {
+      path: "news/:id",
+      component: () => import('@/page/visitor/newsDetail.vue')
+    },
+    {
+      path: "login",
+      component: () => import('@/page/visitor/login.vue')
     },
     { // 重定向
       path: '/',
