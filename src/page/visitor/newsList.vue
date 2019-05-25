@@ -1,12 +1,12 @@
 <template>
-  <div class="carList">
-    <div class="perCard" v-for="(obj,i) in NewsList" :key="i"  >
-      <div class="card-top"  @click="toCar(obj)">
-        <img :src="obj.prodcutImg">
+  <div class="newList">
+    <div class="newCard" v-for="(obj,i) in NewsList" :key="i">
+      <div class="card-left" @click="toNews(obj)">
+        <img :src="obj.imgs">
       </div>
-      <div class="card-buttom"  @click="toCar(obj)">
-        <span class="price">{{"￥"+obj.prodcutPrice+"元"}}</span>
-        <span class="carName">{{obj.productName}}</span>
+      <div class="card-right" @click="toNews(obj)">
+        <strong>{{obj.title}}</strong>
+        <span>{{obj.date}} -  {{obj.position}}</span>
       </div>
     </div>
   </div>
@@ -16,11 +16,14 @@ export default {
   name: "news",
   data() {
     return {
-      NewsList: []
+      id:"",
+      NewsList: [],
+      News:new Object,
     };
   },
   mounted() {
     this.$nextTick(function() {
+     
       this.getDate();
     });
   },
@@ -38,41 +41,53 @@ export default {
           console.log(error);
         });
     },
-   
-     
+    toNews:function(obj){
+      this.$router.push("/home/news/"+obj.newId);
+    }
   } // method end
 };
 </script>
 <style lang="scss">
-$bcolor: #cac7c7;
-
-.perCard {
-  display: inline-block;
-  border: 1px solid $bcolor;
-  text-align: center;
-  width: 30%;
-  margin: 1%;
-  padding: 20px;
-  box-sizing: border-box;
-   transition: 0.2s;
-  img {
-    width: 100%;
-  }
-  .price {
-    font-weight: bold;
-    color: black;
-    display: block;
-    font-size: 16px;
-    margin: 10px;
-  }
-  .carName {
-    color: black;
-  }
-  &:hover{
-    box-shadow: 0px 0px 16px -5px #828282;
-    transform: scale(1.05);
+.newList {
+  width: 1200px;
+  text-align: left;
+  margin: 1% auto;
+  .newCard {
+    cursor: pointer;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: 0.2s;
     transition: 0.2s;
-    border-color: #e89902;
+    border-bottom: 1px solid #f3efef;
+    transition: 0.3s;
+    &:hover {
+      box-shadow: 0px 0px 15px -2px #d6d6d6;
+      transition: 0.3s;
+    }
+    .card-left {
+      display: table-cell;
+      width: 300px;
+      height: auto;
+      img {
+        width: 100%;
+      }
+    }
+    .card-right {
+      position: relative;
+      display: table-cell;
+      vertical-align: top;
+      padding-left: 34px;
+      width: 840px;
+      strong {
+        font-size: 22px;
+      }
+      span {
+        position: absolute;
+        left: 34px;
+        bottom: 15px;
+      }
+    }
   }
 }
 </style>

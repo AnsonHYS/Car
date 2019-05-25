@@ -13,6 +13,7 @@ export const lang = {
     pleaseSelV:'please select',
     pleaseWriteV:'please write in your search',
     priceV:"RMB",
+    backV:'back News',
     INDEX:{
       carytypeV:'CarType',
       hotV:'Hot Show',
@@ -28,14 +29,33 @@ export const lang = {
       payTypeV:'payType',
       cashPayV:'cashPay',
       onlinePayV:'onlinePay',
-      afterSalesV:'after-Sale',
+      afterSalesV:'after Sale',
       policyV:'policy',
       repareV:'repare',
       cancelV:'cancel',
       telV:'tel',
       productV:'productNo'
     },
-    carV:{
+    CART:{
+      outerV:'outer',
+      innerV:'inner',
+      powerV:'power',
+      buyV:'buy',
+      cartypeV:'cartype',
+      numV:'num',
+      priceV:' price',
+      cartBtnV:'join in cart',
+      cartV:'cart',
+      operationV:'operation',
+      totalNumV:'totalNum',
+      totalPriceV:'totalPrice',
+      settleV:'to settle',
+      delV:'del',
+      nullV:'your cart is empty....'
+    },
+    LOGIN:{
+      accV:'account',
+      pwdV:'password',
       
     }
 

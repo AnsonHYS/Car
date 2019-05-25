@@ -28,7 +28,7 @@
         <div class="loginDiv">
           <router-link to="/login">{{$t("lang.loginV")}}</router-link>
           <i class="line"></i>
-          <router-link to="">{{$t('lang.registV')}}</router-link>
+          <router-link to>{{$t('lang.registV')}}</router-link>
         </div>
       </div>
     </div>
@@ -40,9 +40,7 @@
         :class="L.key==navOn?'on a':'a'"
         @click="turnNav(L)"
       >
-    
         {{Language(L.key)}}
-
         <ul class="second-nav" v-if="L.key=='productV'">
           <li v-for="(Lis,i) in CarList" :key="i" @click="toCar(Lis)">{{Lis.productName}}</li>
         </ul>
@@ -55,7 +53,7 @@
 
 <script>
 import LangStorage from "@/com/lang";
-import cart from "@/components/cart.vue"
+import cart from "@/components/cart.vue";
 export default {
   name: "headerDiv",
   data() {
@@ -65,8 +63,9 @@ export default {
       nav: [
         { key: "homeV", url: "/home/index" },
         { key: "productV", url: "" },
-        { key: "aboutV", url: "" },
         { key: "newsV", url: "/home/news" },
+        { key: "aboutV", url: "" },
+
         { key: "contantV", url: "" }
       ],
       SearchVal: "",
@@ -89,7 +88,7 @@ export default {
         .then(response => {
           //这里要使用箭头函数，使用ES5的写法  this是undefined
           console.log(response);
-           
+
           this.CarList = response.data.data.data;
         })
         .catch(error => {
@@ -97,8 +96,9 @@ export default {
         });
     },
     //进入商品页
-    toCar:function(data){
-        this.$router.push({path:"/home/car/"+data.productId});
+    toCar: function(data) {
+      
+      this.$router.push("/home/car/" + data.productId );
     },
     selLang: function(a) {
       var t = this;
@@ -126,22 +126,22 @@ export default {
       this.$router.push(obj.url);
       this.navOn = obj.key;
     }
-  },//method end
-  components:{
-    cart:cart
+  }, //method end
+  components: {
+    cart: cart
   }
 };
 </script>
 
 <style>
 .header {
-    display: table;
-    margin: auto;
-    background: white;
-    -webkit-box-shadow: 0px 0px 5px -3px black;
-    box-shadow: 0px 2px 5px -3px black;
-    width: 100%;
-    margin-bottom: 2px;
+  display: table;
+  margin: auto;
+  background: white;
+  -webkit-box-shadow: 0px 0px 5px -3px black;
+  box-shadow: 0px 2px 5px -3px black;
+  width: 100%;
+  margin-bottom: 2px;
 }
 .nav-title {
   display: table;
@@ -269,8 +269,8 @@ ul.nav {
   border: 0;
   border-bottom: 1px solid white;
   left: 0;
-  top: 45px;
-      z-index: 999;
+  top: 43px;
+  z-index: 999;
 }
 .second-nav li:hover {
   background: #fa8378;

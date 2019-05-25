@@ -13,6 +13,7 @@ export const lang = {
     pleaseSelV:'请选择',
     pleaseWriteV:'请输入查询内容',
     priceV:"元",
+    backV:'返回',
     INDEX:{
       carytypeV:'车型概览',
       hotV:'精彩推荐',
@@ -35,7 +36,26 @@ export const lang = {
       telV:'联系方式',
       productV:'生产号',
     },
-    carV:{
+    CART:{
+      outerV:'外观',
+      innerV:'内饰',
+      powerV:'性能',
+      buyV:'购买',
+      cartypeV:'型号',
+      numV:'数量',
+      priceV:'价格',
+      cartBtnV:'加入购物车',
+      cartV:'购物车',
+      operationV:'操作',
+      totalNumV:'件商品',
+      totalPriceV:'共计',
+      settleV:'去购物车结算',
+      delV:'删除',
+      nullV:'您的购物车空空如也....'
+    },
+    LOGIN:{
+      accV:'用户名',
+      pwdV:'密  码',
       
     }
 

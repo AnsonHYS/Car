@@ -12,6 +12,24 @@
       </h4>
       <carList></carList>
     </div>
+    <!-- 媒体中心 -->
+    <div class="part">
+      <h4>
+        <span>{{$t('lang.INDEX.mediaV')}}</span>
+        <i class="underline"></i>
+      </h4>
+      <ul class="news">
+        <li v-for="(Item,i) in newsList" :key="i" @click="toNews(Item)">
+          <label class="news-date">{{Item.date}}</label>
+
+          <label class="news-img">
+            <img :src="Item.imgs">
+          </label>
+          <label class="news-title">{{Item.title}}</label>
+        </li>
+      </ul>
+      <span class="more" @click="toMore">{{$t('lang.INDEX.moreV')}}</span>
+    </div>
     <!--精彩推荐  -->
     <div class="part">
       <h4>
@@ -25,24 +43,7 @@
         </li>
       </ul>
     </div>
-    <!-- 媒体中心 -->
-    <div class="part">
-      <h4>
-        <span>{{$t('lang.INDEX.mediaV')}}</span>
-        <i class="underline"></i>
-      </h4>
-      <ul class="news">
-        <li v-for="(Item,i) in newsList" :key="i">
-          <label class="news-date">{{Item.date}}</label>
-
-          <label class="news-img">
-            <img :src="Item.imgs">
-          </label>
-          <label class="news-title">{{Item.title}}</label>
-        </li>
-      </ul>
-      <span class="more">{{$t('lang.INDEX.moreV')}}</span>
-    </div>
+     
   </div>
 </template>
 <script>
@@ -96,6 +97,13 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    //新闻列表页
+    toMore:function(){
+      this.$router.push('/home/news');
+    },
+     toNews:function(obj){
+      this.$router.push("/home/news/"+obj.newId);
     }
   },
   components: {
@@ -103,7 +111,7 @@ export default {
   }
 };
 </script>
-<style>
+<style >
 .content {
   width: 100%;
 }

@@ -23,27 +23,31 @@
     <div class="cart-contant">
       <div class="cart_header">
         <span class="cart_txts">
-          <i class="cart_icon"></i>购物车
+          <i class="cart_icon"></i>{{$t('lang.CART.cartV')}}
         </span>
         <span class="cart_close" @click="closeCart"></span>
       </div>
       <div class="cart_middle">
         <!-- 主内容 -->
+        <cartInfo></cartInfo>
+        
       </div>
       <div class="cart_footer">
         <div class="cart_num_div">
-          <span class="cart_num">0</span>件商品
+          <span class="cart_num">{{totalNum}}</span>{{$t('lang.CART.totalNumV')}}
         </div>
         <div class="cart_total_div">
-          共计：
-          <span class="cart_total">￥0.00</span>
+        {{$t('lang.CART.totalPriceV')}}：
+          <span class="cart_total">￥{{totalPrice}}</span>
         </div>
-        <a class="buyBtn">去购物车结算</a>
+        <a class="buyBtn">{{$t('lang.CART.settleV')}}</a>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
+import cartInfo from "@/components/cartInfo.vue";
 export default {
   name: "cart",
   data() {
@@ -53,7 +57,10 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(function() {});
+    this.$nextTick(function() {
+      
+      this.$store.commit('initCart');//初始化購物車,避免刷新消食
+    });
   },
   methods: {
     showCart: function() {
@@ -77,9 +84,20 @@ export default {
         }
       }, 1); // how fast to scroll (this equals roughly 60 fps)
     }
-  } // method end
+  }, // method end
+  computed: {
+     ...mapGetters(["totalPrice", "totalNum"]),
+     
+  },
+  components: {
+    cartInfo: cartInfo
+  }
 };
 </script>
+
+
+
+
 <style lang="scss">
 .cartDiv {
   position: fixed;
